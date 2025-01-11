@@ -12,8 +12,40 @@ A web-based captive portal form built using JavaScript, HTML, and CSS (Vite for 
 
 ## Folder Structure
 
-captive-portal/ ├── backend/ # Backend code (Node.js + MySQL) │ ├── server.js │ ├── db.js │ ├── .env │ ├── package.json ├── frontend/ # Frontend code (Vite project) │ ├── src/ │ │ ├── components/ │ │ ├── App.jsx │ │ ├── main.jsx │ │ ├── index.html │ ├── package.json ├── .gitignore ├── README.md
-
+```
+captive-portal/
+├── backend/                # Backend code (Node.js + MySQL)
+│   ├── .env
+│   ├── db.js
+│   ├── package.json
+│   └── server.js
+├── frontend/               # Frontend code (Vite project)
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── public/
+│   ├── README.md
+│   ├── src/
+│   │   ├── App.css
+│   │   ├── App.tsx
+│   │   ├── assets/
+│   │   ├── components/
+│   │   │   ├── index.ts
+│   │   │   └── LandingForm.tsx
+│   │   ├── index.css
+│   │   ├── main.tsx
+│   │   ├── styles/
+│   │   │   └── styles.css
+│   │   └── vite-env.d.ts
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
+├── .gitignore
+├── package.json
+└── README.md
+```
 
 ## Setup
 
@@ -25,50 +57,59 @@ captive-portal/ ├── backend/ # Backend code (Node.js + MySQL) │ ├─�
 1. On a terminal Navigate to the `backend` directory:
    ```bash
    cd backend
+   ```
 
 2. Install dependencies:
-
-    npm install
+   ```bash
+   npm install
+   ```
 
 3. Create a .env file with the following variables:
-
-    DB_HOST=localhost
-    DB_USER=root
-    DB_PASS=yourpassword
-    DB_NAME=captive_portal
-    PORT=5000
+   ```
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASS=yourpassword
+   DB_NAME=captive_portal
+   PORT=5000
+   ```
 
 4. Start the backend server:
-
-    node server.js
+   ```bash
+   node server.js
+   ```
 
 ### Frontend Setup
 
 1. Navigate to the frontend directory:
-
-    cd frontend
+   ```bash
+   cd frontend
+   ```
 
 2. Install dependencies:
-
-    npm install
+   ```bash
+   npm install
+   ```
 
 3. Start the frontend development server:
-
-    npm run dev
+   ```bash
+   npm run dev
+   ```
 
 ## Full-Stack Integration
 
 To run both servers concurrently, navigate to the project root and use:
-
-    npm run start
+   ```bash
+   npm run start
+   ```
 
 ## Deployment
 
 1. Build the frontend:
+   ```bash
+   npm run build --prefix frontend
+   ```
 
-    npm run build --prefix frontend
-
-2. Serve the frontend/dist folder from the backend by modifying the server.js file.
+2. Serve the 'frontend/dist' folder from the backend by modifying the server.js file.
 
 3. Deploy the backend and frontend to your preferred hosting service.
 
