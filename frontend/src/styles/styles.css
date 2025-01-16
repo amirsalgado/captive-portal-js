@@ -1,83 +1,144 @@
 /* styles.css */
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #007bff, #80d8ff);
-    color: #fff;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #007bff, #80d8ff);
+  color: #fff;
+}
+
+.form-container {
+  background: #fff;
+  color: #333;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+h1  {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+/* Imagen del logo */
+.form-logo {
+  width: 120px; 
+  max-width: 100%; 
+  height: auto; 
+  margin: 0 auto 1rem; 
+  display: block;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input {
+  width: 100%; 
+  box-sizing: border-box; 
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #0056b3;
+}
+
+.hidden {
+  display: none;
+}
+
+#successMessage {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #28a745;
+  background: #dff5e3;
+  color: #28a745;
+  border-radius: 4px;
+}
+
+/* Media Queries */
+
+/* Pantallas medianas (tablets) */
+@media (max-width: 768px) {
   .form-container {
-    background: #fff;
-    color: #333;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+      padding: 1.5rem; /* Reducir el padding */
+      max-width: 90%; /* Ocupa el 90% del ancho */
   }
-  
+
   h1 {
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
+      font-size: 1.6rem; /* Reducir tamaño de fuente */
   }
-  
-  .form-group {
-    margin-bottom: 1rem;
-    text-align: left;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-  }
-  
+
   input {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+      font-size: 0.9rem; /* Reducir fuente en entradas */
+      padding: 0.7rem; /* Ajustar padding */
   }
-  
-  input:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-  
+
   .submit-btn {
-    width: 100%;
-    padding: 0.8rem;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
+      font-size: 0.9rem; /* Reducir tamaño del botón */
+      padding: 0.7rem;
   }
-  
-  .submit-btn:hover {
-    background: #0056b3;
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+  .form-container {
+      padding: 1rem; /* Reducir padding */
+      border-radius: 6px; /* Ajustar bordes */
   }
-  
-  .hidden {
-    display: none;
+
+  h1 {
+      font-size: 1.4rem; /* Reducir tamaño de fuente */
   }
-  
-  #successMessage {
-    margin-top: 1rem;
-    padding: 1rem;
-    border: 1px solid #28a745;
-    background: #dff5e3;
-    color: #28a745;
-    border-radius: 4px;
+
+  input {
+      font-size: 0.8rem; /* Reducir fuente en entradas */
+      padding: 0.6rem; /* Ajustar padding */
   }
-  
+
+  .submit-btn {
+      font-size: 0.8rem; /* Reducir tamaño del botón */
+      padding: 0.6rem;
+  }
+}
