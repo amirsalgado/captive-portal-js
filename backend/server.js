@@ -17,14 +17,14 @@ app.post('/submit', async (req, res) => {
   }
 
   try {
-    const [result] = await db.query(
+    const [result] = await db.execute(
       'INSERT INTO users (name, phone, birthday) VALUES (?, ?, ?)',
       [name, phone, birthday]
     );
-    res.status(200).send({ message: 'Data saved successfully!', id: result.insertId });
+    res.status(200).json({ message: 'Data saved successfully!', id: result.insertId });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error.');
+    res.status(500).json({ message: 'Server error.' });
   }
 });
 
