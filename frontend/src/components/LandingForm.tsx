@@ -22,32 +22,40 @@ export const LandingForm = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        setMessage('Data submitted successfully!');
+        setMessage('Datos enviados exitosamente!');
       } else {
-        setMessage(data.message || 'Submission failed.');
+        setMessage(data.message || 'Falló el envío');
       }
     } catch (error) {
       console.error(error);
-      setMessage('An error occurred.');
+      setMessage('Ocurrió un Error');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="form-container">
       <div>
-        <label htmlFor="name">Name</label>
-        <input type="text" id="name" value={formData.name} onChange={handleChange} required />
+        <img src="../assets/logo.png" alt="Logo" className="form-logo" />
+        <h3>Portal WiFi - Sancocho Bacano</h3>
+        <p>Bienvenido a nuestro portal de acceso a internet. Por favor registrate para poder conectarte a nuestra red</p>
       </div>
-      <div>
-        <label htmlFor="phone">Phone</label>
-        <input type="tel" id="phone" value={formData.phone} onChange={handleChange} required />
-      </div>
-      <div>
-        <label htmlFor="birthday">Birthday</label>
-        <input type="date" id="birthday" value={formData.birthday} onChange={handleChange} required />
-      </div>
-      <button type="submit">Submit</button>
-      {message && <p>{message}</p>}
-    </form>
+      <form onSubmit={handleSubmit}>
+        <div className='form-group'>
+          <label htmlFor="name">Nombre</label>
+          <input type="text" id="name" value={formData.name} onChange={handleChange} required />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="phone">Teléfono</label>
+          <input type="tel" id="phone" value={formData.phone} onChange={handleChange} required />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="birthday">Fecha de Cumpleaños</label>
+          <input type="date" id="birthday" value={formData.birthday} onChange={handleChange} required />
+        </div>
+        <br />
+        <button className='submit-btn' type="submit">Enviar</button>
+        {message && <p>{message}</p>}
+      </form>
+    </div>
   );
 };
