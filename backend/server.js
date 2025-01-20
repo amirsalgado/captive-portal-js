@@ -1,19 +1,17 @@
-// server.js
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const db = require('./db');
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import db from './db.js'; // Ensure the correct file extension is used
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// API endpoint to save form data
-app.post('/submit', async (req, res) => {
+app.post('/users', async (req, res) => {
   const { name, phone, birthday } = req.body;
 
   if (!name || !phone || !birthday) {
-    return res.status(400).send('Rellene todos los campos por favor.');
+    return res.status(400).json({ message: 'Rellene todos los campos por favor.' });
   }
 
   try {
@@ -23,73 +21,71 @@ app.post('/submit', async (req, res) => {
     );
     res.status(200).json({ message: 'Guardado exitosamente!', id: result.insertId });
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error.');
+    console.error('Error during database operation:', error.message, error.stack);
+    res.status(500).json({ message: 'Server error.', error: error.message });
   }
 });
 
-// API endpoint to get all data
-app.get('/data', async (req, res) => {
+// Read
+app.get('/users', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM users');
-    res.status(200).send(rows);
+    res.status(200).json(rows);
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error.');
+    console.error('Error during database operation:', error.message, error.stack);
+    res.status(500).json({ message: 'Server error.', error: error.message });
   }
 });
 
-// API endpoint to get a single user
-app.get('/data/:id', async (req, res) => {
+app.get('/users/:id', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [req.params.id]);
     if (rows.length === 0) {
-      return res.status(404).send('Usuario no encontrado.');
+      return res.status(404).json({ message: 'Usuario no encontrado.' });
     }
-    res.status(200).send(rows[0]);
+    res.status(200).json(rows[0]);
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error.');
+    console.error('Error during database operation:', error.message, error.stack);
+    res.status(500).json({ message: 'Server error.', error: error.message });
   }
 });
 
-// API endpoint to update a user
-app.put('/data/:id', async (req, res) => {
+// Update
+app.put('/users/:id', async (req, res) => {
   const { name, phone, birthday } = req.body;
 
   if (!name || !phone || !birthday) {
-    return res.status(400).send('Rellene todos los campos por favor.');
+    return res.status(400).json({ message: 'Rellene todos los campos por favor.' });
   }
 
   try {
-    const [result] = await db.query(
+    const [result] = await db.execute(
       'UPDATE users SET name = ?, phone = ?, birthday = ? WHERE id = ?',
       [name, phone, birthday, req.params.id]
     );
     if (result.affectedRows === 0) {
-      return res.status(404).send('Usuario no encontrado.');
+      return res.status(404).json({ message: 'Usuario no encontrado.' });
     }
-    res.status(200).send('Usuario actualizado exitosamente!');
+    res.status(200).json({ message: 'Actualizado exitosamente!' });
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error.');
+    console.error('Error during database operation:', error.message, error.stack);
+    res.status(500).json({ message: 'Server error.', error: error.message });
   }
 });
 
-// API endpoint to delete a user
-app.delete('/data/:id', async (req, res) => {
+// Delete
+app.delete('/users/:id', async (req, res) => {
   try {
     const [result] = await db.query('DELETE FROM users WHERE id = ?', [req.params.id]);
     if (result.affectedRows === 0) {
-      return res.status(404).send('Usuario no encontrado.');
+      return res.status(404).json({ message: 'Usuario no encontrado.' });
     }
-    res.status(200).send('Usuario eliminado exitosamente!');
+    res.status(200).json({ message: 'Usuario eliminado exitosamente!' });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error.' });
+    console.error('Error during database operation:', error.message, error.stack);
+    res.status(500).json({ message: 'Server error.', error: error.message });
   }
 });
-
 
 // Start the server
 const PORT = process.env.PORT || 5000;
