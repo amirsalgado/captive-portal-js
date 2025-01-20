@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from '../assets/logo.png';
 
 export const LandingForm = () => {
   const [formData, setFormData] = useState({
@@ -35,7 +36,7 @@ export const LandingForm = () => {
   return (
     <div className="form-container">
       <div>
-        <img src="../assets/logo.png" alt="Logo" className="form-logo" />
+        <img src={logo} alt="Logo" className="form-logo" />
         <h3>Portal WiFi - Sancocho Bacano</h3>
         <p>Bienvenido a nuestro portal de acceso a internet. Por favor registrate para poder conectarte a nuestra red</p>
       </div>
