@@ -1,7 +1,15 @@
 // db.js
 import mysql from 'mysql2';
 import dotenv from 'dotenv';
-dotenv.config({ path: './backend/.env' });
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+// Get the directory name
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load environment variables from .env file
+dotenv.config({ path: path.resolve(__dirname, './.env') });
 
 console.log('DB Config:', {
   host: process.env.DB_HOST,

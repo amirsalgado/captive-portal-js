@@ -5,11 +5,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:backend": "node backend/server.js",
-    "start:frontend": "npm run dev --prefix frontend",
-    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+    "build:frontend": "npm run build --prefix frontend",
+    "serve:frontend": "npx serve -s frontend/dist -l 3000",
+    "start:backend": "pm2 start ecosystem.config.cjs --only backend --env production",
+    "start:frontend": "npm run build:frontend && npm run serve:frontend",
+    "start:production": "npm run start:backend && npm run start:frontend"
   },
   "dependencies": {
     "concurrently": "^7.6.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
   }
 }
