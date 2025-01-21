@@ -16,7 +16,7 @@ module.exports = {
       {
         name: 'frontend', 
         script: 'npm',
-        args: 'run start', 
+        args: 'run dev', 
         cwd: './frontend', 
         watch: false, // No es común observar cambios en el frontend en producción
         env: {
