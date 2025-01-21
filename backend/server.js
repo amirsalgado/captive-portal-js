@@ -4,7 +4,14 @@ import cors from 'cors';
 import db from './db.js'; // Ensure the correct file extension is used
 
 const app = express();
-app.use(cors());
+
+// Configure CORS to allow requests from your specific origin
+const corsOptions = {
+  origin: 'http://3.145.91.214:3000', // Replace with your frontend's origin
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.post('/users', async (req, res) => {
