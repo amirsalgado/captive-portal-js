@@ -17,7 +17,7 @@ export const LandingForm = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:5000/users', {
+      const response = await fetch('http://3.145.91.214:5000/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json;charset=UTF-8' },
         body: JSON.stringify(formData),

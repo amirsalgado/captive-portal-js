@@ -7,7 +7,7 @@ const app = express();
 
 // Configure CORS to allow requests from your specific origin
 const corsOptions = {
-  origin: 'http://localhost:3000', // Replace with your frontend's origin
+  origin: 'http://3.145.91.214:3000', // Replace with your frontend's origin
   optionsSuccessStatus: 200,
 };
 
