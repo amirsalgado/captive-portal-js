@@ -12,17 +12,8 @@ const corsOptions = {
 };
  */
 
-// Configure CORS to allow requests from dev origin
-const allowedOrigins = ['http://3.145.91.214:3000', 'http://localhost:3000', 'http://localhost', 'null'];
-
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: '*', //all origins are allowed
   optionsSuccessStatus: 200,
 };
 
