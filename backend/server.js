@@ -5,9 +5,24 @@ import db from './db.js'; // Ensure the correct file extension is used
 
 const app = express();
 
-// Configure CORS to allow requests from your specific origin
+/* // Configure CORS to allow requests from your specific origin
 const corsOptions = {
   origin: 'http://3.145.91.214:3000', // Replace with your frontend's origin
+  optionsSuccessStatus: 200,
+};
+ */
+
+// Configure CORS to allow requests from dev origin
+const allowedOrigins = ['http://3.145.91.214:3000', 'http://localhost:3000', 'http://localhost', 'null'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   optionsSuccessStatus: 200,
 };
 
