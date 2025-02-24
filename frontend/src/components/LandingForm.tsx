@@ -11,12 +11,12 @@ interface IFormValues {
 export const LandingForm = () => {
   const {
     register,
-    handleSubmit,
+    handleSubmit,    
+    setValue, 
     formState: { errors },
-    setValue,
   } = useForm<IFormValues>();
 
-  const onSubmit: SubmitHandler<IFormValues> = async (data) => {
+  const onSubmit: SubmitHandler<IFormValues> = async (data: IFormValues) => { 
     try {
       const response = await fetch('http://3.145.91.214:5000/users', {
         method: 'POST',
@@ -55,11 +55,11 @@ export const LandingForm = () => {
             {...register('name', {
               required: 'El nombre es obligatorio.',
               pattern: { 
-                value: /^(?!.*(.)\1{2,})[A-Za-zÁÉÍÓÚáéíóúÑñ]{3,} (?!.*(.)\1{2,})[A-Za-zÁÉÍÓÚáéíóúÑñ]+$/, 
-                message: 'Debe ingresar nombre y apellido válidos.'
+                value: /^(?!.*(.)\1{2,})[A-ZÁÉÍÓÚÑ]{3,} (?!.*(.)\1{2,})[A-ZÁÉÍÓÚÑ]+$/, 
+                message: 'Debe ingresar nombre y apellido válidos.' 
               },
             })}
-            onChange={(e) => setValue('name', e.target.value.toUpperCase())} // Convierte a mayúsculas
+            onChange={(e) => setValue('name', e.target.value.toUpperCase())} 
           />
           {errors.name && <p className="error-message">{errors.name.message}</p>}
         </div>
@@ -89,7 +89,7 @@ export const LandingForm = () => {
             id="birthday"
             {...register('birthday', {
               required: 'La fecha de cumpleaños es obligatoria.',
-              validate: (value) => (new Date(value) > new Date() ? 'No puede ser una fecha futura.' : true),
+              validate: (value: string) => (new Date(value) > new Date() ? 'No puede ser una fecha futura.' : true),
             })}
           />
           {errors.birthday && <p className="error-message">{errors.birthday.message}</p>}
