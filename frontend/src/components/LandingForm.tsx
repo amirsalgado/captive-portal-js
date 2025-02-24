@@ -11,12 +11,12 @@ interface IFormValues {
 export const LandingForm = () => {
   const {
     register,
-    handleSubmit,
+    handleSubmit,    
     setValue, 
     formState: { errors },
   } = useForm<IFormValues>();
 
-  const onSubmit: SubmitHandler<IFormValues> = async (data: IFormValues) => {
+  const onSubmit: SubmitHandler<IFormValues> = async (data: IFormValues) => { 
     try {
       const response = await fetch('http://3.145.91.214:5000/users', {
         method: 'POST',
@@ -56,7 +56,7 @@ export const LandingForm = () => {
               required: 'El nombre es obligatorio.',
               pattern: { 
                 value: /^(?!.*(.)\1{2,})[A-ZÁÉÍÓÚÑ]{3,} (?!.*(.)\1{2,})[A-ZÁÉÍÓÚÑ]+$/, 
-                message: 'Debe ingresar nombre y apellido válidos, sin caracteres repetitivos o irreales.' 
+                message: 'Debe ingresar nombre y apellido válidos.' 
               },
             })}
             onChange={(e) => setValue('name', e.target.value.toUpperCase())} 
@@ -74,7 +74,7 @@ export const LandingForm = () => {
               required: 'El teléfono es obligatorio.',
               pattern: { 
                 value: /^3\d{9}$/, 
-                message: 'Debe ser un número de 10 dígitos y empezar por 3.' 
+                message: 'Debe ser un número de 10 dígitos.' 
               },
             })}
           />
