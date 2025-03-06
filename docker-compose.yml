@@ -1,32 +1,38 @@
-version: "3.8"
+version: '3'
 
 services:
   frontend:
     build:
-      context: .
-      dockerfile: frontend/Dockerfile
-    container_name: frontend
-    ports:
-      - "80:80"
+      context: ./frontend
+    networks:
+      - captive-portal-network
+    expose:
+      - 80  # Exponer puerto 80 solo dentro de la red de Docker, no al host.
     depends_on:
       - backend
 
   backend:
     build:
-      context: .
-      dockerfile: backend/Dockerfile
-    container_name: backend
-    ports:
-      - "5000:5000"
-
+      context: ./backend
+    networks:
+      - captive-portal-network
+    expose:
+      - 5000 # Puerto del backend expuesto solo dentro de Docker, no al host.
+      
   nginx:
-    image: nginx:alpine
+    image: nginx:latest
     container_name: nginx
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./frontend/dist:/usr/share/nginx/html
     ports:
-      - "80:80"
+      - "80:80"  # Exponer el puerto 80 del host
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./frontend/dist:/usr/share/nginx/html
+    networks:
+      - captive-portal-network
     depends_on:
       - frontend
       - backend
+
+networks:
+  captive-portal-network:
+    driver: bridge
