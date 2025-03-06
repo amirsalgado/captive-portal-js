@@ -5,13 +5,13 @@ FROM node:18 AS build
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY frontend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy all source code
-COPY frontend/ .
+COPY . .
 
 # Build the React app for production
 RUN npm run build
