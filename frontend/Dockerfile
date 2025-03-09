@@ -1,20 +1,24 @@
-# Usar una imagen de Node.js
-FROM node:18
+# Usa Node.js como base
+FROM node:18 AS build
 
-# Crear y movernos al directorio de trabajo
 WORKDIR /app
 
-# Copiar los archivos del frontend y construir la aplicación
-COPY frontend/package*.json ./
+# Copiar archivos y dependencias
+COPY package*.json ./
 RUN npm install
-COPY frontend/ ./
+COPY . ./
+
+# Construir la aplicación
 RUN npm run build
 
-# Instalar un servidor HTTP ligero
+# Usar una imagen ligera para servir el frontend
+FROM node:18-alpine
+
+WORKDIR /app
+
 RUN npm install -g serve
 
-# Exponer el puerto 80
-EXPOSE 80
+COPY --from=build /app/dist /app
 
-# Servir la aplicación estática
-CMD ["serve", "-s", "dist", "-l", "80"]
+# Servir la app en el puerto 3000
+CMD ["serve", "-s", "/app", "-l", "3000"]
