@@ -14,7 +14,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "80:3000"  # Cambia el puerto 3000 a 80
+      - "80:3000"  # Redirige el tráfico de la máquina (80) al contenedor (3000)
     environment:
       - NODE_ENV=production
     restart: always
