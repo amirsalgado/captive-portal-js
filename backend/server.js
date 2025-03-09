@@ -32,7 +32,7 @@ const isValidBirthday = (birthday) => {
 };
 
 // Crear usuario
-app.post('/api/users', async (req, res) => {
+app.post('/users', async (req, res) => {
   let { name, phone, birthday } = req.body;
 
   if (!name || !phone || !birthday) {
@@ -68,7 +68,7 @@ app.post('/api/users', async (req, res) => {
 });
 
 // Obtener todos los usuarios
-app.get('/api/users', async (req, res) => {
+app.get('/users', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM users');
     res.status(200).json(rows);
@@ -79,7 +79,7 @@ app.get('/api/users', async (req, res) => {
 });
 
 // Obtener usuario por ID
-app.get('/api/users/:id', async (req, res) => {
+app.get('/users/:id', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [req.params.id]);
     if (rows.length === 0) {
@@ -93,7 +93,7 @@ app.get('/api/users/:id', async (req, res) => {
 });
 
 // Actualizar usuario
-app.put('/api/users/:id', async (req, res) => {
+app.put('/users/:id', async (req, res) => {
   let { name, phone, birthday } = req.body;
 
   if (!name || !phone || !birthday) {
@@ -132,7 +132,7 @@ app.put('/api/users/:id', async (req, res) => {
 });
 
 // Eliminar usuario
-app.delete('/api/users/:id', async (req, res) => {
+app.delete('/users/:id', async (req, res) => {
   try {
     const [result] = await db.query('DELETE FROM users WHERE id = ?', [req.params.id]);
     if (result.affectedRows === 0) {

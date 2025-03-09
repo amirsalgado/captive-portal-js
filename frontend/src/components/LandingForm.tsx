@@ -18,7 +18,7 @@ export const LandingForm = () => {
 
   const onSubmit: SubmitHandler<IFormValues> = async (data: IFormValues) => { 
     try {
-      const response = await fetch('http://3.149.251.88/api/users', {
+      const response = await fetch('http://3.149.251.88:5000/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json;charset=UTF-8' },
         body: JSON.stringify(data),

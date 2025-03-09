@@ -1,26 +1,20 @@
-# Dockerfile for React frontend
-FROM node:18 AS build
+# Usar una imagen de Node.js
+FROM node:18
 
-# Set working directory
+# Crear y movernos al directorio de trabajo
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies
+# Copiar los archivos del frontend y construir la aplicación
+COPY frontend/package*.json ./
 RUN npm install
-
-# Copy all source code
-COPY . .
-
-# Build the React app for production
+COPY frontend/ ./
 RUN npm run build
 
-# Serve the app using a simple server
-FROM nginx:alpine
+# Instalar un servidor HTTP ligero
+RUN npm install -g serve
 
-# Copy the build files to nginx
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Expose the port on which nginx will serve the app
+# Exponer el puerto 80
 EXPOSE 80
+
+# Servir la aplicación estática
+CMD ["serve", "-s", "dist", "-l", "80"]
